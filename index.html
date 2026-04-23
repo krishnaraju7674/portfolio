@@ -7,27 +7,27 @@
     <title>Krishnam Raju | Full Stack Web Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
         rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         :root {
-            --bg: #060608;
-            --bg2: #0d0d14;
-            --bg3: #12121c;
-            --purple: #7c3aed;
-            --purple2: #a855f7;
-            --blue: #3b82f6;
-            --cyan: #06b6d4;
-            --neon: #c026d3;
-            --silver: #94a3b8;
-            --white: #f1f5f9;
-            --glass: rgba(255, 255, 255, 0.04);
-            --glass2: rgba(255, 255, 255, 0.08);
-            --border: rgba(255, 255, 255, 0.08);
-            --border2: rgba(124, 58, 237, 0.3);
+            --bg: #080808;
+            --bg2: #0d0d0d;
+            --bg3: #150a0a;
+            --purple: #ff0000;
+            --purple2: #ffd700;
+            --blue: #00f2ff;
+            --cyan: #00f2ff;
+            --neon: #ffcc00;
+            --silver: #a0a0a0;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass2: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 215, 0, 0.1);
+            --border2: rgba(255, 0, 0, 0.3);
         }
 
         * {
@@ -53,20 +53,21 @@
             position: fixed;
             width: 12px;
             height: 12px;
-            background: var(--purple2);
+            background: var(--cyan);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
             transition: width .2s, height .2s, background .2s;
-            mix-blend-mode: screen;
+            mix-blend-mode: normal;
+            box-shadow: 0 0 10px var(--cyan);
         }
 
         #cursor-ring {
             position: fixed;
             width: 40px;
             height: 40px;
-            border: 1px solid rgba(168, 85, 247, .5);
+            border: 1px solid rgba(0, 242, 255, .5);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
@@ -118,7 +119,7 @@
         }
 
         .loader-logo {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 5rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--purple), var(--cyan));
@@ -142,9 +143,10 @@
         .loader-bar {
             height: 100%;
             width: 0;
-            background: linear-gradient(90deg, var(--purple), var(--cyan));
+            background: linear-gradient(90deg, var(--purple), var(--neon));
             border-radius: 2px;
             transition: width 1.8s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0 0 15px var(--purple);
         }
 
         .loader-text {
@@ -173,14 +175,16 @@
         }
 
         .nav-logo {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--purple2), var(--cyan));
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple), var(--neon));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
         }
 
         .nav-links {
@@ -233,7 +237,7 @@
 
         .nav-cta:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(124, 58, 237, .5);
+            box-shadow: 0 0 30px rgba(255, 0, 0, .5);
         }
 
         /* ── HERO ── */
@@ -264,13 +268,14 @@
             gap: .5rem;
             padding: .4rem 1rem;
             border-radius: 2rem;
-            border: 1px solid rgba(6, 182, 212, .3);
-            background: rgba(6, 182, 212, .05);
+            border: 1px solid rgba(255, 0, 0, .3);
+            background: rgba(255, 0, 0, .05);
             font-size: .75rem;
             font-family: 'Space Mono', monospace;
-            color: var(--cyan);
+            color: var(--purple);
             margin-bottom: 2rem;
             animation: pulse-badge 2s infinite;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
 
         .badge-dot {
@@ -294,14 +299,13 @@
         }
 
         @keyframes pulse-badge {
-
             0%,
             100% {
-                box-shadow: 0 0 0 rgba(6, 182, 212, 0);
+                box-shadow: 0 0 0 rgba(255, 0, 0, 0);
             }
 
             50% {
-                box-shadow: 0 0 15px rgba(6, 182, 212, .15);
+                box-shadow: 0 0 15px rgba(255, 0, 0, .15);
             }
         }
 
@@ -314,19 +318,20 @@
         }
 
         .hero-name {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 5.5rem;
-            font-weight: 800;
+            font-weight: 900;
             line-height: 1;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff 0%, var(--purple2) 50%, var(--cyan) 100%);
+            background: linear-gradient(135deg, #fff 0%, var(--purple) 50%, var(--purple2) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
         }
 
         .hero-role {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--purple2);
@@ -353,7 +358,7 @@
             border-radius: .5rem;
             background: linear-gradient(135deg, var(--purple), var(--purple2));
             color: #fff;
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 600;
             font-size: .9rem;
             border: none;
@@ -379,7 +384,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, .4);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, .4);
         }
 
         .btn-primary span {
@@ -392,7 +397,7 @@
             border: 1px solid var(--border2);
             background: transparent;
             color: var(--white);
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 600;
             font-size: .9rem;
             cursor: none;
@@ -422,7 +427,7 @@
         }
 
         .stat-num {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--white), var(--purple2));
@@ -506,7 +511,7 @@
         }
 
         .section-title {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.1;
@@ -561,7 +566,8 @@
             z-index: 2;
             border: 3px solid transparent;
             background: linear-gradient(var(--bg2), var(--bg2)) padding-box,
-                        linear-gradient(135deg, var(--purple2), var(--cyan)) border-box;
+                        linear-gradient(135deg, var(--purple), var(--purple2)) border-box;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
         }
 
         .avatar-inner img {
@@ -580,7 +586,7 @@
         .avatar-glow {
             position: absolute;
             inset: -50%;
-            background: radial-gradient(circle, rgba(124, 58, 237, .3), transparent 70%);
+            background: radial-gradient(circle, rgba(255, 0, 0, .3), transparent 70%);
             animation: avatar-glow 3s ease-in-out infinite;
         }
 
@@ -648,7 +654,7 @@
         }
 
         .stat-card-num {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--purple2), var(--cyan));
@@ -716,7 +722,7 @@
         }
 
         .skill-cat-title {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--white);
@@ -837,14 +843,14 @@
         .project-card:hover {
             border-color: var(--border2);
             transform: translateY(-6px) rotateX(1deg);
-            box-shadow: 0 20px 60px rgba(124, 58, 237, .2);
+            box-shadow: 0 20px 60px rgba(255, 0, 0, .2);
         }
 
         .project-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(124, 58, 237, .08), rgba(6, 182, 212, .05));
+            background: linear-gradient(135deg, rgba(255, 0, 0, .08), rgba(255, 215, 0, .05));
             opacity: 0;
             transition: opacity .4s;
         }
@@ -877,7 +883,7 @@
         }
 
         .project-title {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--white);
@@ -912,7 +918,7 @@
         .tech-pill {
             padding: .2rem .6rem;
             border-radius: 2rem;
-            border: 1px solid rgba(124, 58, 237, .3);
+            border: 1px solid rgba(255, 215, 0, .3);
             font-size: .65rem;
             color: var(--purple2);
             font-family: 'Space Mono', monospace;
@@ -968,7 +974,7 @@
         }
 
         .metric-val {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--white);
@@ -1016,13 +1022,13 @@
             border-radius: 50%;
             background: var(--bg);
             border: 2px solid var(--purple2);
-            box-shadow: 0 0 20px rgba(124, 58, 237, .4);
+            box-shadow: 0 0 20px rgba(255, 0, 0, .4);
             transition: all .3s;
         }
 
         .timeline-item:hover .timeline-dot {
             background: var(--purple);
-            box-shadow: 0 0 30px rgba(124, 58, 237, .6);
+            box-shadow: 0 0 30px rgba(255, 0, 0, .6);
         }
 
         .timeline-date {
@@ -1034,7 +1040,7 @@
         }
 
         .timeline-role {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--white);
@@ -1110,7 +1116,7 @@
         }
 
         .quote-mark {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 4rem;
             font-weight: 800;
             color: var(--purple);
@@ -1139,13 +1145,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             font-size: .9rem;
         }
 
         .author-name {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: .9rem;
             font-weight: 600;
             color: var(--white);
@@ -1205,11 +1211,11 @@
         .achievement-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            filter: drop-shadow(0 0 12px rgba(124, 58, 237, .4));
+            filter: drop-shadow(0 0 12px rgba(255, 0, 0, .4));
         }
 
         .achievement-title {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1rem;
             font-weight: 700;
             color: var(--white);
@@ -1286,7 +1292,7 @@
             border-radius: .5rem;
             background: linear-gradient(135deg, var(--purple), var(--purple2));
             color: #fff;
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             font-size: 1rem;
             border: none;
@@ -1308,7 +1314,7 @@
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, .4);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, .4);
         }
 
         .submit-btn:hover::after {
@@ -1320,7 +1326,7 @@
         }
 
         .contact-heading {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
             line-height: 1.2;
@@ -1378,7 +1384,7 @@
         }
 
         .social-name {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: .95rem;
             font-weight: 600;
             color: var(--white);
@@ -1401,7 +1407,7 @@
         }
 
         .footer-logo {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--purple2), var(--cyan));
@@ -1433,7 +1439,7 @@
 
         .back-to-top:hover {
             transform: translateY(-4px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(124, 58, 237, .4);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, .4);
         }
 
         /* ── PROGRESS BAR ── */
@@ -1710,7 +1716,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            background: linear-gradient(135deg, #fff, var(--purple2));
+            background: linear-gradient(135deg, #fff, var(--purple));
         }
 
         .glitch::before {
@@ -1943,15 +1949,15 @@
 
         <div class="hero-stats">
             <div class="stat-item reveal">
-                <div class="stat-num" data-count="10">0+</div>
+                <div class="stat-num counter" data-target="3">0+</div>
                 <div class="stat-label">PROJECTS</div>
             </div>
             <div class="stat-item reveal" style="transition-delay:.1s">
-                <div class="stat-num" data-count="5">0+</div>
+                <div class="stat-num counter" data-target="5">0+</div>
                 <div class="stat-label">CLIENTS</div>
             </div>
             <div class="stat-item reveal" style="transition-delay:.2s">
-                <div class="stat-num" data-count="2">0+</div>
+                <div class="stat-num counter" data-target="2">0+</div>
                 <div class="stat-label">YRS EXP</div>
             </div>
         </div>
@@ -1969,7 +1975,7 @@
                 <div class="about-avatar reveal" style="position:relative;">
                     <div class="avatar-glow"></div>
                     <div class="avatar-inner">
-                        <img src="profile.png" alt="Krishnam Raju" />
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG268KeNLUDzBL_Y8uUQ6zlYq34L6Fb-MkTw&s" alt="Ironman" />
                     </div>
                     <div class="profile-badge">⚡ Full Stack Dev</div>
                     <div class="profile-badge">🔐 Cybersecurity</div>
@@ -2322,7 +2328,7 @@
             <div class="contact-form reveal" style="transition-delay:.2s">
                 <div class="form-group">
                     <label class="form-label">YOUR NAME</label>
-                    <input type="text" class="form-input" placeholder="Elon Musk" id="form-name">
+                    <input type="text" class="form-input" placeholder="Tony Stark" id="form-name">
                 </div>
                 <div class="form-group">
                     <label class="form-label">EMAIL ADDRESS</label>
@@ -2344,7 +2350,7 @@
     <!-- FOOTER -->
     <footer>
         <a href="#hero" class="footer-logo">KR</a>
-        <p class="footer-copy">© 2025 Krishnam Raju · Built with ♥ & excessive caffeine</p>
+        <p class="footer-copy">© 2025 Krishnam Raju · Full Stack Web Developer · Precise. Powerful. Professional.</p>
         <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
     </footer>
 
@@ -2457,7 +2463,7 @@
             const timer = setInterval(() => {
                 current += inc;
                 if (current >= target) { current = target; clearInterval(timer); }
-                el.textContent = Math.floor(current) + (target > 9 ? '+' : '');
+                el.textContent = Math.floor(current) + '+';
             }, 16);
         }
         const counterObs = new IntersectionObserver(entries => {
@@ -2506,16 +2512,15 @@
                 const filter = btn.dataset.filter;
                 document.querySelectorAll('.project-card').forEach(card => {
                     if (filter === 'all' || card.dataset.category.includes(filter)) {
-                        card.style.display = 'block'; card.style.opacity = '1';
+                        card.style.display = 'block'; card.style.opacity = '1'; card.style.pointerEvents = 'all';
                     } else {
                         card.style.opacity = '0.2'; card.style.pointerEvents = 'none';
-                        setTimeout(() => { if (!card.dataset.category.includes(filter) && filter !== 'all') card.style.pointerEvents = 'none'; }, 300);
                     }
                 });
             });
         });
 
-        // ─── THREE.JS HERO SCENE ─────────────────────────────
+        // ─── THREE.JS HERO SCENE (ULTRA-REALISTIC ARC REACTOR) ──
         (function () {
             const canvas = document.getElementById('hero-canvas');
             const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -2524,62 +2529,106 @@
 
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, .1, 100);
-            camera.position.z = 5;
+            camera.position.z = 6;
 
-            // Icosahedron
-            const geo = new THREE.IcosahedronGeometry(1.4, 2);
-            const mat = new THREE.MeshPhongMaterial({
-                color: 0x7c3aed, wireframe: true,
-                emissive: 0x4c1d95, transparent: true, opacity: .5
+            const arcGroup = new THREE.Group();
+            scene.add(arcGroup);
+
+            // Core Energy Center
+            const coreGeo = new THREE.CylinderGeometry(0.7, 0.7, 0.4, 32);
+            const coreMat = new THREE.MeshPhongMaterial({ 
+                color: 0x00f2ff, 
+                emissive: 0x00f2ff, 
+                emissiveIntensity: 4, 
+                transparent: true, 
+                opacity: 0.95 
             });
-            const mesh = new THREE.Mesh(geo, mat);
-            scene.add(mesh);
+            const core = new THREE.Mesh(coreGeo, coreMat);
+            core.rotation.x = Math.PI / 2;
+            arcGroup.add(core);
 
-            // Outer ring
-            const rGeo = new THREE.TorusGeometry(2.2, .02, 8, 80);
-            const rMat = new THREE.MeshBasicMaterial({ color: 0xa855f7, transparent: true, opacity: .3 });
-            const ring3d = new THREE.Mesh(rGeo, rMat);
-            ring3d.rotation.x = Math.PI / 4;
-            scene.add(ring3d);
+            // Core Inner Glow Sphere
+            const innerGlow = new THREE.Mesh(
+                new THREE.SphereGeometry(0.5, 32, 32),
+                new THREE.MeshBasicMaterial({ color: 0xffffff })
+            );
+            arcGroup.add(innerGlow);
 
-            // Second ring
-            const rGeo2 = new THREE.TorusGeometry(2.8, .015, 8, 80);
-            const rMat2 = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: .2 });
-            const ring3d2 = new THREE.Mesh(rGeo2, rMat2);
-            ring3d2.rotation.x = Math.PI / 3; ring3d2.rotation.y = Math.PI / 5;
-            scene.add(ring3d2);
+            // Stark Tech Coils (Detailed Copper)
+            const coilGroup = new THREE.Group();
+            const coilCount = 10;
+            for(let i=0; i<coilCount; i++) {
+                const angle = (i / coilCount) * Math.PI * 2;
+                
+                // Coil Base
+                const coilBase = new THREE.Mesh(
+                    new THREE.BoxGeometry(0.4, 0.3, 0.5),
+                    new THREE.MeshStandardMaterial({ color: 0x1a1a1a, metalness: 1, roughness: 0.2 })
+                );
+                
+                // Copper Wires (Simulated by small cylinders)
+                for(let j=0; j<3; j++) {
+                    const wire = new THREE.Mesh(
+                        new THREE.CylinderGeometry(0.04, 0.04, 0.6, 8),
+                        new THREE.MeshStandardMaterial({ color: 0xb87333, metalness: 1, roughness: 0.3 })
+                    );
+                    wire.rotation.z = Math.PI / 2;
+                    wire.position.y = (j - 1) * 0.15;
+                    coilBase.add(wire);
+                }
+                
+                coilBase.position.x = Math.cos(angle) * 1.6;
+                coilBase.position.y = Math.sin(angle) * 1.6;
+                coilBase.rotation.z = angle;
+                coilGroup.add(coilBase);
+            }
+            arcGroup.add(coilGroup);
 
-            // Floating particles
-            const pGeo = new THREE.BufferGeometry();
-            const pCount = 200;
-            const pPos = new Float32Array(pCount * 3);
-            for (let i = 0; i < pCount * 3; i++) pPos[i] = (Math.random() - .5) * 12;
-            pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-            const pMat = new THREE.PointsMaterial({ color: 0x7c3aed, size: .04, transparent: true, opacity: .6 });
-            scene.add(new THREE.Points(pGeo, pMat));
+            // Main Housing Rings
+            const ringMat = new THREE.MeshStandardMaterial({ color: 0x222222, metalness: 1, roughness: 0.1 });
+            
+            const r1 = new THREE.Mesh(new THREE.TorusGeometry(1.4, 0.08, 16, 100), ringMat);
+            arcGroup.add(r1);
+
+            const r2 = new THREE.Mesh(new THREE.TorusGeometry(1.9, 0.05, 16, 100), ringMat);
+            arcGroup.add(r2);
+
+            const r3 = new THREE.Mesh(new THREE.TorusGeometry(2.4, 0.1, 16, 100), 
+                new THREE.MeshStandardMaterial({ color: 0xff0000, metalness: 0.8, roughness: 0.2 }));
+            arcGroup.add(r3);
+
+            // Tech Mesh / Grid
+            const gridGeo = new THREE.IcosahedronGeometry(1.3, 1);
+            const gridMat = new THREE.MeshBasicMaterial({ color: 0x00f2ff, wireframe: true, transparent: true, opacity: 0.1 });
+            const grid = new THREE.Mesh(gridGeo, gridMat);
+            arcGroup.add(grid);
 
             // Lights
-            scene.add(new THREE.AmbientLight(0xffffff, .3));
-            const pl = new THREE.PointLight(0x7c3aed, 2, 20); pl.position.set(3, 3, 3); scene.add(pl);
-            const pl2 = new THREE.PointLight(0x06b6d4, 1.5, 20); pl2.position.set(-3, -2, 2); scene.add(pl2);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+            const p1 = new THREE.PointLight(0x00f2ff, 6, 15); p1.position.set(0, 0, 3); scene.add(p1);
+            const p2 = new THREE.PointLight(0xffd700, 2, 10); p2.position.set(3, 3, 2); scene.add(p2);
+            const p3 = new THREE.PointLight(0xff0000, 3, 15); p3.position.set(-3, -3, 2); scene.add(p3);
 
             let mouseX = 0, mouseY = 0;
             document.addEventListener('mousemove', e => {
-                mouseX = (e.clientX / window.innerWidth - .5) * .5;
-                mouseY = (e.clientY / window.innerHeight - .5) * .5;
+                mouseX = (e.clientX / window.innerWidth - .5);
+                mouseY = (e.clientY / window.innerHeight - .5);
             });
 
             let t = 0;
             function animate() {
                 requestAnimationFrame(animate);
-                t += .006;
-                mesh.rotation.x = t * .3 + mouseY * .5;
-                mesh.rotation.y = t * .5 + mouseX * .5;
-                ring3d.rotation.z = t * .2;
-                ring3d2.rotation.z = -t * .15;
-                // Breathing scale
-                const s = 1 + Math.sin(t) * 0.05;
-                mesh.scale.set(s, s, s);
+                t += 0.01;
+                arcGroup.rotation.y = mouseX * 0.5;
+                arcGroup.rotation.x = -mouseY * 0.5;
+                coilGroup.rotation.z += 0.003;
+                grid.rotation.y -= 0.01;
+                
+                // Pulse Core
+                const s = 1 + Math.sin(t * 3) * 0.05;
+                core.scale.set(s, s, s);
+                innerGlow.scale.set(s, s, s);
+                
                 renderer.render(scene, camera);
             }
             animate();
