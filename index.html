@@ -3,31 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishnam Raju | Full Stack Web Developer</title>
+    <meta name="description" content="Krishnam Raju - Full Stack Web Developer & AI Builder. Crafting cinematic digital experiences.">
+    <title>Krishnam Raju | Full Stack Web Developer & AI Enthusiast</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
         rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <style>
+        /* Portfolio Design System Tokens */
         :root {
-            --bg: #080808;
-            --bg2: #0d0d0d;
-            --bg3: #150a0a;
-            --purple: #ff0000;
-            --purple2: #ffd700;
+            --bg: #050505;
+            --bg2: #0a0a0a;
+            --bg3: #0f0f12;
+            --purple: #ff3333;
+            --purple2: #ffcc00;
             --blue: #00f2ff;
             --cyan: #00f2ff;
             --neon: #ffcc00;
-            --silver: #a0a0a0;
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass2: rgba(255, 255, 255, 0.06);
-            --border: rgba(255, 215, 0, 0.1);
-            --border2: rgba(255, 0, 0, 0.3);
+            --silver: #94a3b8;
+            --white: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.02);
+            --glass2: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.08);
+            --border2: rgba(255, 51, 51, 0.4);
+            --accent-glow: rgba(255, 51, 51, 0.15);
         }
 
         * {
@@ -57,29 +60,33 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
             transition: width .2s, height .2s, background .2s;
             mix-blend-mode: normal;
             box-shadow: 0 0 10px var(--cyan);
+            will-change: transform;
         }
 
         #cursor-ring {
             position: fixed;
             width: 40px;
             height: 40px;
-            border: 1px solid rgba(0, 242, 255, .5);
+            border: 1.5px solid var(--purple);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
             transition: width .3s, height .3s, border-color .3s;
+            will-change: transform;
         }
 
         #cursor-trail {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9997;
+            display: none;
         }
+
+        /* ── SPOTLIGHT REMOVED FOR PERFORMANCE ── */
 
         .trail-dot {
             position: absolute;
@@ -89,6 +96,7 @@
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
+            will-change: left, top;
         }
 
         body:has(a:hover) #cursor,
@@ -164,14 +172,14 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 1.25rem 4rem;
+            padding: 1rem 4rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(6, 6, 8, .7);
-            backdrop-filter: blur(20px);
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(15px) saturate(180%);
             border-bottom: 1px solid var(--border);
-            transition: all .3s;
+            transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-logo {
@@ -237,8 +245,34 @@
 
         .nav-cta:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 0, 0, .5);
+            box-shadow: 0 0 30px var(--accent-glow);
         }
+
+        /* ── HUD ELEMENTS ── */
+        .hud-element {
+            position: absolute;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--border2);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.6;
+        }
+
+        .hud-tl { top: 2rem; left: 2rem; }
+        .hud-tr { top: 2rem; right: 2rem; }
+        .hud-bl { bottom: 2rem; left: 2rem; }
+        .hud-br { bottom: 2rem; right: 2rem; }
+
+        .hud-line {
+            position: absolute;
+            background: var(--border);
+        }
+
+        .hud-h-line { height: 1px; width: 100px; }
+        .hud-v-line { width: 1px; height: 100px; }
 
         /* ── HERO ── */
         #hero {
@@ -639,7 +673,7 @@
         }
 
         .stat-card {
-            background: var(--glass);
+            background: rgba(15, 15, 18, 0.85);
             border: 1px solid var(--border);
             border-radius: 1rem;
             padding: 1.25rem;
@@ -683,7 +717,7 @@
         }
 
         .skill-category {
-            background: var(--glass);
+            background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             border-radius: 1.25rem;
             padding: 2rem;
@@ -739,7 +773,7 @@
             padding: .35rem .85rem;
             border-radius: 2rem;
             border: 1px solid var(--border);
-            background: var(--glass);
+            background: rgba(15, 15, 18, 0.7);
             font-size: .75rem;
             color: var(--silver);
             font-family: 'Space Mono', monospace;
@@ -783,6 +817,7 @@
             background: linear-gradient(90deg, var(--purple), var(--cyan));
             width: 0;
             transition: width 1.5s cubic-bezier(.4, 0, .2, 1);
+            box-shadow: 0 0 10px var(--purple);
         }
 
         /* ── PROJECTS ── */
@@ -825,7 +860,7 @@
         }
 
         .project-card {
-            background: var(--glass);
+            background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             border-radius: 1.25rem;
             padding: 2rem;
@@ -943,7 +978,7 @@
             width: 32px;
             height: 32px;
             border-radius: .4rem;
-            background: var(--glass2);
+            background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             color: var(--white);
             font-size: .7rem;
@@ -1054,7 +1089,7 @@
         }
 
         .timeline-card {
-            background: var(--glass);
+            background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             border-radius: 1rem;
             padding: 1.5rem;
@@ -1103,7 +1138,7 @@
 
         .testimonial-card {
             min-width: 380px;
-            background: var(--glass);
+            background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             border-radius: 1.25rem;
             padding: 2rem;
@@ -1140,6 +1175,27 @@
         .author-avatar {
             width: 44px;
             height: 44px;
+        }
+
+        #assistant-orb {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--purple);
+            box-shadow: 0 0 20px var(--purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            z-index: 1000;
+            transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .author-avatar {
             border-radius: 50%;
             background: linear-gradient(135deg, var(--purple), var(--cyan));
             display: flex;
@@ -1176,7 +1232,7 @@
         }
 
         .achievement-card {
-            background: var(--glass);
+            background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             border-radius: 1.25rem;
             padding: 1.75rem;
@@ -1240,8 +1296,16 @@
             align-items: start;
         }
 
+        .glass-card {
+            background: rgba(15, 15, 18, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            transition: all .4s;
+        }
+
         .contact-form {
-            background: var(--glass);
+            background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             border-radius: 1.5rem;
             padding: 2.5rem;
@@ -1264,7 +1328,7 @@
         .form-textarea {
             width: 100%;
             padding: .85rem 1.1rem;
-            background: var(--bg);
+            background: rgba(15, 15, 18, 0.85);
             border: 1px solid var(--border);
             border-radius: .5rem;
             color: var(--white);
@@ -1462,8 +1526,7 @@
             align-items: flex-start;
             justify-content: center;
             padding-top: 20vh;
-            background: rgba(0, 0, 0, .7);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, .85);
         }
 
         #cmd-palette.open {
@@ -1548,18 +1611,19 @@
         }
 
         .theme-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--glass2);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--glass);
             border: 1px solid var(--border);
             cursor: none;
-            color: var(--silver);
-            font-size: 1.1rem;
+            color: var(--white);
+            font-size: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all .3s;
+            transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
 
         .theme-btn:hover {
@@ -1612,6 +1676,7 @@
             background: var(--purple2);
             animation: float-particle linear infinite;
             opacity: 0;
+            will-change: transform;
         }
 
         @keyframes float-particle {
@@ -1634,6 +1699,8 @@
             }
         }
 
+        .particle { will-change: transform, opacity; }
+
         /* ── MAGNETIC BUTTON EFFECT ── */
         .magnetic {
             transition: transform .3s cubic-bezier(.2, 1, .3, 1);
@@ -1642,8 +1709,9 @@
         /* ── REVEAL ANIMS ── */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity .8s, transform .8s;
+            transform: translateY(20px);
+            transition: opacity .4s ease-out, transform .4s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal.visible {
@@ -1669,6 +1737,16 @@
             --bg: #000005;
             --bg2: #05050f;
             --bg3: #08081a;
+        }
+
+        /* ── IRON CORE THEME (BLUE MIX) ── */
+        body.theme-ironcore {
+            --purple: #00a2ff;
+            --purple2: #00ffcc;
+            --cyan: #ffffff;
+            --neon: #00f2ff;
+            --border2: rgba(0, 162, 255, 0.5);
+            --accent-glow: rgba(0, 162, 255, 0.2);
         }
 
         /* ── FLOATING ORB ── */
@@ -1891,14 +1969,10 @@
     <div id="theme-switcher">
         <button class="theme-btn" id="theme-toggle-btn" title="Switch theme">◐</button>
         <div class="theme-options" id="theme-options">
-            <button class="theme-option" data-theme="" style="background:linear-gradient(135deg,#7c3aed,#06b6d4)"
-                title="Default"></button>
-            <button class="theme-option" data-theme="neon" style="background:linear-gradient(135deg,#00ff88,#ff00ff)"
-                title="Neon"></button>
-            <button class="theme-option" data-theme="cyber" style="background:linear-gradient(135deg,#ff6b00,#ffcc00)"
-                title="Cyber"></button>
-            <button class="theme-option" data-theme="midnight"
-                style="background:linear-gradient(135deg,#1a1a3e,#2d1b69)" title="Midnight"></button>
+            <button class="theme-option" data-theme="" style="background:linear-gradient(135deg, #ff3333, #ffcc00)"
+                title="Crimson Core (Default)"></button>
+            <button class="theme-option" data-theme="ironcore" style="background:linear-gradient(135deg, #00a2ff, #00ffcc)"
+                title="Iron Core (Blue)"></button>
         </div>
     </div>
 
@@ -1915,13 +1989,22 @@
             <a href="#experience">Journey</a>
             <a href="#contact">Contact</a>
         </div>
-        <button class="nav-cta" onclick="window.open('#')">Let's Talk ✦</button>
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Let's Talk ✦</button>
     </nav>
 
     <!-- HERO -->
     <section id="hero">
         <canvas id="hero-canvas"></canvas>
         <div class="grid-lines"></div>
+
+        <!-- HUD ELEMENTS -->
+        <div class="hud-element hud-tl">SYS_STATUS: OPTIMAL</div>
+        <div class="hud-element hud-tr">LOC: 17.4474° N, 78.3762° E</div>
+        <div class="hud-element hud-bl">CORE_TEMP: 32°C</div>
+        <div class="hud-element hud-br">BATT_LVL: 98%</div>
+
+        <div class="hud-line hud-h-line" style="top: 2.5rem; left: 10rem;"></div>
+        <div class="hud-line hud-v-line" style="top: 5rem; left: 2.5rem;"></div>
 
         <div class="hero-content">
             <div class="hero-badge">
@@ -1942,14 +2025,27 @@
                         →</span></button>
                 <a href="G_Krishnam_Raju_Resume (1).pdf" download class="btn-outline magnetic"
                     style="text-decoration:none;display:inline-flex;align-items:center;">Download Resume</a>
-                <button class="btn-outline magnetic"
-                    onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+            </div>
+
+            <!-- SYSTEM CONSOLE -->
+            <div class="reveal" style="margin-top: 3rem; transition-delay: .5s; max-width: 400px; padding: 1rem; background: var(--glass); border: 1px solid var(--border); border-radius: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--silver);">
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <span style="color: #ef4444;">●</span>
+                    <span style="color: #eab308;">●</span>
+                    <span style="color: #22c55e;">●</span>
+                    <span style="margin-left: auto; opacity: 0.5;">TERM_v1.0.4</span>
+                </div>
+                <div id="system-terminal">
+                    <div style="color: var(--purple2);">> Initializing core...</div>
+                    <div style="color: var(--cyan);">> Connection established via secure_link.</div>
+                    <div style="color: var(--white);">> Ready to build.</div>
+                </div>
             </div>
         </div>
 
         <div class="hero-stats">
             <div class="stat-item reveal">
-                <div class="stat-num counter" data-target="3">0+</div>
+                <div class="stat-num counter" data-target="7">0+</div>
                 <div class="stat-label">PROJECTS</div>
             </div>
             <div class="stat-item reveal" style="transition-delay:.1s">
@@ -1975,7 +2071,7 @@
                 <div class="about-avatar reveal" style="position:relative;">
                     <div class="avatar-glow"></div>
                     <div class="avatar-inner">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG268KeNLUDzBL_Y8uUQ6zlYq34L6Fb-MkTw&s" alt="Ironman" />
+                        <img src="profile_original.jpg" alt="Krishnam Raju" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG268KeNLUDzBL_Y8uUQ6zlYq34L6Fb-MkTw&s'" />
                     </div>
                     <div class="profile-badge">⚡ Full Stack Dev</div>
                     <div class="profile-badge">🔐 Cybersecurity</div>
@@ -1999,7 +2095,7 @@
 
                 <div class="stats-row">
                     <div class="stat-card reveal" style="transition-delay:.3s">
-                        <div class="stat-card-num counter" data-target="10">0</div>
+                        <div class="stat-card-num counter" data-target="14">0</div>
                         <div class="stat-card-label">PROJECTS</div>
                     </div>
                     <div class="stat-card reveal" style="transition-delay:.35s">
@@ -2030,22 +2126,22 @@
                 <p class="skill-cat-label">01 / FRONTEND</p>
                 <h3 class="skill-cat-title">Interface Engineering</h3>
                 <div class="skill-pills">
-                    <span class="skill-pill">React.js</span><span class="skill-pill">HTML5</span>
-                    <span class="skill-pill">CSS3</span><span class="skill-pill">Tailwind CSS</span>
-                    <span class="skill-pill">JavaScript</span><span class="skill-pill">TypeScript</span>
-                    <span class="skill-pill">LWC</span><span class="skill-pill">Apex</span>
+                    <span class="skill-pill">Next.js</span><span class="skill-pill">React.js</span>
+                    <span class="skill-pill">LWC</span><span class="skill-pill">TypeScript</span>
+                    <span class="skill-pill">Tailwind CSS</span><span class="skill-pill">HTML5/CSS3</span>
+                    <span class="skill-pill">JavaScript (ES6+)</span><span class="skill-pill">Apex</span>
                 </div>
                 <div class="skill-bar-wrap">
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>React.js / JavaScript</span><span>95%</span></div>
+                        <div class="skill-bar-label"><span>Next.js / React.js</span><span>98%</span></div>
                         <div class="skill-bar-track">
-                            <div class="skill-bar-fill" data-width="95"></div>
+                            <div class="skill-bar-fill" data-width="98"></div>
                         </div>
                     </div>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>TypeScript / Tailwind CSS</span><span>90%</span></div>
+                        <div class="skill-bar-label"><span>TypeScript / LWC</span><span>94%</span></div>
                         <div class="skill-bar-track">
-                            <div class="skill-bar-fill" data-width="90"></div>
+                            <div class="skill-bar-fill" data-width="94"></div>
                         </div>
                     </div>
                     <div class="skill-bar-item">
@@ -2061,19 +2157,19 @@
                 <h3 class="skill-cat-title">Server Architecture</h3>
                 <div class="skill-pills">
                     <span class="skill-pill">Python</span><span class="skill-pill">Supabase</span>
-                    <span class="skill-pill">MySQL</span><span class="skill-pill">MongoDB</span>
-                    <span class="skill-pill">REST APIs</span><span class="skill-pill">Node.js</span>
-                    <span class="skill-pill">C</span><span class="skill-pill">Salesforce</span>
+                    <span class="skill-pill">Gradio</span><span class="skill-pill">Node.js</span>
+                    <span class="skill-pill">MySQL/MongoDB</span><span class="skill-pill">REST APIs</span>
+                    <span class="skill-pill">Firebase</span><span class="skill-pill">Salesforce</span>
                 </div>
                 <div class="skill-bar-wrap">
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>Python / C</span><span>88%</span></div>
+                        <div class="skill-bar-label"><span>Python / Gradio</span><span>95%</span></div>
                         <div class="skill-bar-track">
-                            <div class="skill-bar-fill" data-width="88"></div>
+                            <div class="skill-bar-fill" data-width="95"></div>
                         </div>
                     </div>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>Supabase / REST APIs</span><span>92%</span></div>
+                        <div class="skill-bar-label"><span>Supabase / Backend Arch</span><span>92%</span></div>
                         <div class="skill-bar-track">
                             <div class="skill-bar-fill" data-width="92"></div>
                         </div>
@@ -2090,22 +2186,22 @@
                 <p class="skill-cat-label">03 / AI + CLOUD</p>
                 <h3 class="skill-cat-title">AI & Infrastructure</h3>
                 <div class="skill-pills">
-                    <span class="skill-pill">Generative AI</span><span class="skill-pill">Cybersecurity</span>
-                    <span class="skill-pill">Git</span><span class="skill-pill">GitHub</span>
-                    <span class="skill-pill">VS Code</span><span class="skill-pill">Netlify</span>
-                    <span class="skill-pill">Postman</span><span class="skill-pill">IoT</span>
+                    <span class="skill-pill">LLMs / GenAI</span><span class="skill-pill">Stockfish AI</span>
+                    <span class="skill-pill">Hugging Face</span><span class="skill-pill">Vercel</span>
+                    <span class="skill-pill">Git/GitHub</span><span class="skill-pill">Postman</span>
+                    <span class="skill-pill">Cybersecurity</span><span class="skill-pill">IoT</span>
                 </div>
                 <div class="skill-bar-wrap">
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>Generative AI / Tools</span><span>85%</span></div>
+                        <div class="skill-bar-label"><span>LLMs / Prompt Engineering</span><span>96%</span></div>
                         <div class="skill-bar-track">
-                            <div class="skill-bar-fill" data-width="85"></div>
+                            <div class="skill-bar-fill" data-width="96"></div>
                         </div>
                     </div>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>Cybersecurity / Web Security</span><span>82%</span></div>
+                        <div class="skill-bar-label"><span>AI Integration / HuggingFace</span><span>90%</span></div>
                         <div class="skill-bar-track">
-                            <div class="skill-bar-fill" data-width="82"></div>
+                            <div class="skill-bar-fill" data-width="90"></div>
                         </div>
                     </div>
                     <div class="skill-bar-item">
@@ -2187,6 +2283,62 @@
                         class="tech-pill">Embedded</span>
                 </div>
             </div>
+
+            <div class="project-card reveal" data-category="fullstack" style="transition-delay:.2s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 004</p>
+                <h3 class="project-title">KnightMind Chess</h3>
+                <p class="project-desc">A professional-grade chess engine with AI-driven analysis, move suggestions, and real-time multiplayer capabilities.</p>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
+                    <a href="https://expo.dev/accounts/ishowsmart/projects/knightmind-chess/builds/620b360f-401e-4574-86ff-c3bfb6c3d0e0" target="_blank" class="project-link-btn">↗</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">TypeScript</span><span class="tech-pill">React</span><span class="tech-pill">Stockfish</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" data-category="web fullstack" style="transition-delay:.25s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 005</p>
+                <h3 class="project-title">Blue Wing AI</h3>
+                <p class="project-desc">Advanced flight-intelligence platform utilizing generative AI for real-time navigation and drone telemetry analysis.</p>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
+                    <a href="https://blue-wing-ai.vercel.app" target="_blank" class="project-link-btn">↗</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">Next.js</span><span class="tech-pill">Python</span><span class="tech-pill">LLMs</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" data-category="web" style="transition-delay:.3s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 006</p>
+                <h3 class="project-title">AI Career OS</h3>
+                <p class="project-desc">A comprehensive dashboard for managing careers in the AI era, including roadmap generators and job intelligence tools.</p>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
+                    <a href="https://ai-career-os-puce.vercel.app" target="_blank" class="project-link-btn">↗</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">React</span><span class="tech-pill">Tailwind</span><span class="tech-pill">Supabase</span>
+                </div>
+            </div>
+
+            <div class="project-card featured reveal" data-category="web fullstack" style="transition-delay:.35s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 007 — CLINICAL OS</p>
+                <h3 class="project-title">MediScan X Ωmega</h3>
+                <p class="project-desc">High-fidelity medical diagnostic platform featuring quantum-clinical UI and AI-driven healthcare data visualization.</p>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
+                    <a href="https://gkr7674-mediscan-x-omega.hf.space" target="_blank" class="project-link-btn">↗</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">Gradio</span><span class="tech-pill">Python</span><span class="tech-pill">Medical AI</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2199,6 +2351,15 @@
         <div class="timeline">
             <div class="timeline-item reveal">
                 <div class="timeline-dot"></div>
+                <p class="timeline-date">MAR 2026 — MAY 2026</p>
+                <h3 class="timeline-role">Full Stack Developer Intern</h3>
+                <p class="timeline-company">NoviTech R&D Private Limited</p>
+                <div class="timeline-card">
+                    <p class="timeline-desc">Successfully completed a 30-Day MasterClass in Full Stack Development. Gained hands-on experience in architecting scalable web applications and mastering the end-to-end development lifecycle.</p>
+                </div>
+            </div>
+            <div class="timeline-item reveal" style="transition-delay:.1s">
+                <div class="timeline-dot"></div>
                 <p class="timeline-date">ONGOING</p>
                 <h3 class="timeline-role">Salesforce Developer Trainee</h3>
                 <p class="timeline-company">Self-Paced / Project-Based</p>
@@ -2207,7 +2368,7 @@
                         custom triggers and optimizing SOQL queries for data retrieval.</p>
                 </div>
             </div>
-            <div class="timeline-item reveal" style="transition-delay:.1s">
+            <div class="timeline-item reveal" style="transition-delay:.2s">
                 <div class="timeline-dot"></div>
                 <p class="timeline-date">RECENT</p>
                 <h3 class="timeline-role">Generative AI Intern</h3>
@@ -2217,7 +2378,7 @@
                         development use cases and improve productivity systems.</p>
                 </div>
             </div>
-            <div class="timeline-item reveal" style="transition-delay:.2s">
+            <div class="timeline-item reveal" style="transition-delay:.3s">
                 <div class="timeline-dot"></div>
                 <p class="timeline-date">RECENT</p>
                 <h3 class="timeline-role">Cybersecurity Intern</h3>
@@ -2227,7 +2388,7 @@
                         practices for securing web applications against OWASP Top 10 vulnerabilities.</p>
                 </div>
             </div>
-            <div class="timeline-item reveal" style="transition-delay:.3s">
+            <div class="timeline-item reveal" style="transition-delay:.4s">
                 <div class="timeline-dot"></div>
                 <p class="timeline-date">2023 — 2027</p>
                 <h3 class="timeline-role">B.Tech, Information Technology</h3>
@@ -2400,8 +2561,19 @@
         setTimeout(() => {
             clearInterval(ltInterval);
             loader.style.opacity = '0';
-            setTimeout(() => { loader.style.display = 'none'; initReveal(); }, 800);
+            setTimeout(() => { 
+                loader.style.display = 'none'; 
+                initReveal(); 
+                initLenis();
+            }, 800);
         }, 2400);
+
+        // ─── LENIS SMOOTH SCROLL ─────────────────────────────
+        // ─── SMOOTH SCROLL DISABLED FOR PERFORMANCE ────────
+        function initLenis() {
+            // Smooth scroll removed to resolve 1-2s lag reported on some systems.
+            // Using native high-performance scroll instead.
+        }
 
         // ─── CUSTOM CURSOR ───────────────────────────────────
         const cursor = document.getElementById('cursor');
@@ -2420,22 +2592,15 @@
         }
         document.addEventListener('mousemove', e => {
             mx = e.clientX; my = e.clientY;
-            cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
         });
-        let rafRunning = false;
+
         function animateRing() {
-            rx += (mx - rx) * .12; ry += (my - ry) * .12;
-            ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-            for (let i = trails.length - 1; i > 0; i--) {
-                trails[i].x += (trails[i - 1].x - trails[i].x) * .35;
-                trails[i].y += (trails[i - 1].y - trails[i].y) * .35;
-                trails[i].el.style.left = trails[i].x + 'px';
-                trails[i].el.style.top = trails[i].y + 'px';
-            }
-            trails[0].x += (mx - trails[0].x) * .35;
-            trails[0].y += (my - trails[0].y) * .35;
-            trails[0].el.style.left = trails[0].x + 'px';
-            trails[0].el.style.top = trails[0].y + 'px';
+            // Smoothly move cursor
+            cursor.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+
+            rx += (mx - rx) * .15; ry += (my - ry) * .15;
+            ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+            
             requestAnimationFrame(animateRing);
         }
         animateRing();
@@ -2504,6 +2669,27 @@
         }
         setInterval(rotateRole, 2500);
 
+        // ─── SYSTEM TERMINAL DYNAMIC LOGS ───────────────────
+        const termMessages = [
+            'Secure handshake verified...',
+            'Compiling neural pathways...',
+            'Injecting creative logic...',
+            'Optimizing pixel arrays...',
+            'Syncing with local time...',
+            'Quantum clinical modules active.',
+            'Bypassing design limitations...',
+            'Loading premium aesthetics...'
+        ];
+        const terminalEl = document.getElementById('system-terminal');
+        function addTerminalLog() {
+            const div = document.createElement('div');
+            div.style.color = Math.random() > 0.5 ? 'var(--cyan)' : 'var(--purple2)';
+            div.textContent = `> ${termMessages[Math.floor(Math.random() * termMessages.length)]}`;
+            terminalEl.appendChild(div);
+            if (terminalEl.children.length > 5) terminalEl.removeChild(terminalEl.children[0]);
+        }
+        setInterval(addTerminalLog, 4000);
+
         // ─── PROJECT FILTERS ─────────────────────────────────
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -2523,8 +2709,8 @@
         // ─── THREE.JS HERO SCENE (ULTRA-REALISTIC ARC REACTOR) ──
         (function () {
             const canvas = document.getElementById('hero-canvas');
-            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+            renderer.setPixelRatio(1); // Lock to 1 for performance
             renderer.setSize(window.innerWidth, window.innerHeight);
 
             const scene = new THREE.Scene();
@@ -2534,11 +2720,20 @@
             const arcGroup = new THREE.Group();
             scene.add(arcGroup);
 
+            // Get colors from CSS
+            const getStyleColor = (prop) => {
+                const color = getComputedStyle(document.body).getPropertyValue(prop).trim();
+                return new THREE.Color(color);
+            };
+
+            let themeColor = getStyleColor('--purple');
+            let themeColor2 = getStyleColor('--cyan');
+
             // Core Energy Center
             const coreGeo = new THREE.CylinderGeometry(0.7, 0.7, 0.4, 32);
             const coreMat = new THREE.MeshPhongMaterial({ 
-                color: 0x00f2ff, 
-                emissive: 0x00f2ff, 
+                color: themeColor, 
+                emissive: themeColor, 
                 emissiveIntensity: 4, 
                 transparent: true, 
                 opacity: 0.95 
@@ -2605,9 +2800,18 @@
 
             // Lights
             scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-            const p1 = new THREE.PointLight(0x00f2ff, 6, 15); p1.position.set(0, 0, 3); scene.add(p1);
-            const p2 = new THREE.PointLight(0xffd700, 2, 10); p2.position.set(3, 3, 2); scene.add(p2);
-            const p3 = new THREE.PointLight(0xff0000, 3, 15); p3.position.set(-3, -3, 2); scene.add(p3);
+            const p1 = new THREE.PointLight(themeColor, 6, 15); p1.position.set(0, 0, 3); scene.add(p1);
+            const p2 = new THREE.PointLight(0xffffff, 2, 10); p2.position.set(3, 3, 2); scene.add(p2);
+            const p3 = new THREE.PointLight(themeColor, 3, 15); p3.position.set(-3, -3, 2); scene.add(p3);
+
+            // Global update function for theme changes
+            window.update3DColors = () => {
+                const newColor = getStyleColor('--purple');
+                gsap.to(coreMat.color, { r: newColor.r, g: newColor.g, b: newColor.b, duration: 0.8 });
+                gsap.to(coreMat.emissive, { r: newColor.r, g: newColor.g, b: newColor.b, duration: 0.8 });
+                gsap.to(p1.color, { r: newColor.r, g: newColor.g, b: newColor.b, duration: 0.8 });
+                gsap.to(p3.color, { r: newColor.r, g: newColor.g, b: newColor.b, duration: 0.8 });
+            };
 
             let mouseX = 0, mouseY = 0;
             document.addEventListener('mousemove', e => {
@@ -2616,13 +2820,24 @@
             });
 
             let t = 0;
+            let isVisible = true;
+            ScrollTrigger.create({
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                onToggle: self => isVisible = self.isActive
+            });
+
             function animate() {
                 requestAnimationFrame(animate);
+                if (!isVisible) return;
+                
                 t += 0.01;
-                arcGroup.rotation.y = mouseX * 0.5;
-                arcGroup.rotation.x = -mouseY * 0.5;
-                coilGroup.rotation.z += 0.003;
+                arcGroup.rotation.y = mouseX * 0.5 + t * 0.2;
+                arcGroup.rotation.x = -mouseY * 0.5 + Math.sin(t * 0.5) * 0.1;
+                coilGroup.rotation.z += 0.005;
                 grid.rotation.y -= 0.01;
+                grid.rotation.z += 0.005;
                 
                 // Pulse Core
                 const s = 1 + Math.sin(t * 3) * 0.05;
@@ -2642,7 +2857,7 @@
 
         // ─── PARTICLES FIELD ─────────────────────────────────
         const pContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 15; i++) {
             const p = document.createElement('div');
             p.className = 'particle';
             const size = Math.random() * 3 + 1;
@@ -2701,6 +2916,9 @@
                 document.body.className = '';
                 if (btn.dataset.theme) document.body.classList.add('theme-' + btn.dataset.theme);
                 themeOptions.classList.remove('open');
+                
+                // Trigger 3D Color Update (Once)
+                if (typeof window.update3DColors === 'function') window.update3DColors();
             });
         });
         document.addEventListener('click', e => {
