@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Krishnam Raju - Full Stack Web Developer & AI Builder. Crafting cinematic digital experiences.">
+    <meta name="description" content="Krishnam Raju - Full Stack Web Developer & AI Product Builder. Crafting deployed web apps, university AI systems, and premium product experiences.">
     <meta name="theme-color" content="#050505">
     <meta property="og:title" content="Krishnam Raju | Full Stack Web Developer & AI Builder">
     <meta property="og:description" content="A cinematic portfolio featuring deployed web apps, AI tools, secure systems, and hardware-backed prototypes.">
     <meta property="og:type" content="website">
-    <title>Krishnam Raju | Full Stack Web Developer & AI Enthusiast</title>
+    <title>Krishnam Raju | Full Stack Web Developer & AI Product Builder</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
@@ -293,11 +293,63 @@
             position: absolute;
             inset: 0;
             z-index: 0;
+            opacity: .95;
+            filter: drop-shadow(0 0 35px rgba(255, 204, 0, .18));
+            pointer-events: none;
+        }
+
+        .arc-reactor-backdrop {
+            position: absolute;
+            width: min(42vw, 520px);
+            aspect-ratio: 1;
+            right: clamp(1.5rem, 7vw, 7rem);
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            z-index: 1;
+            opacity: .62;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at center, rgba(255, 255, 255, .95) 0 4%, rgba(255, 204, 0, .8) 5% 9%, transparent 10%),
+                repeating-conic-gradient(from 8deg, rgba(255, 204, 0, .28) 0 7deg, transparent 7deg 19deg),
+                radial-gradient(circle at center, transparent 0 22%, rgba(255, 204, 0, .28) 23% 24%, transparent 25% 34%, rgba(255, 51, 51, .2) 35% 36%, transparent 37% 48%, rgba(0, 242, 255, .16) 49% 50%, transparent 51%),
+                radial-gradient(circle at center, rgba(255, 204, 0, .14), transparent 63%);
+            box-shadow:
+                inset 0 0 45px rgba(255, 204, 0, .16),
+                0 0 90px rgba(255, 0, 0, .18),
+                0 0 130px rgba(0, 242, 255, .08);
+            animation: reactorSpin 28s linear infinite, reactorPulse 3.2s ease-in-out infinite;
+        }
+
+        .arc-reactor-backdrop::before,
+        .arc-reactor-backdrop::after {
+            content: '';
+            position: absolute;
+            inset: 13%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 204, 0, .35);
+            box-shadow: inset 0 0 22px rgba(255, 204, 0, .12), 0 0 26px rgba(255, 204, 0, .12);
+        }
+
+        .arc-reactor-backdrop::after {
+            inset: 31%;
+            border-color: rgba(0, 242, 255, .35);
+            animation: reactorSpin 12s linear infinite reverse;
+        }
+
+        @keyframes reactorSpin {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        @keyframes reactorPulse {
+            0%, 100% { opacity: .5; }
+            50% { opacity: .72; }
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             max-width: 700px;
         }
 
@@ -872,29 +924,31 @@
 
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-auto-rows: 280px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1.25rem;
+            max-width: 980px;
+            margin: 0 auto;
         }
 
         .project-card {
             background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             border-radius: 1.25rem;
-            padding: 2rem;
+            padding: clamp(1rem, 1.6vw, 1.45rem);
             position: relative;
             overflow: hidden;
             transition: all .4s cubic-bezier(.4, 0, .2, 1);
             cursor: none;
             display: flex;
             flex-direction: column;
-            gap: .75rem;
-            min-height: 280px;
+            gap: .6rem;
+            aspect-ratio: 1 / 1;
+            min-height: 0;
         }
 
         .project-card.featured {
-            grid-column: span 2;
-            grid-row: span 2;
+            grid-column: auto;
+            grid-row: auto;
         }
 
         .project-card:hover {
@@ -947,24 +1001,29 @@
 
         .project-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 1.65vw, 1.25rem);
             font-weight: 700;
             color: var(--white);
             position: relative;
             z-index: 1;
             padding-right: 4.5rem;
+            line-height: 1.25;
         }
 
         .project-card.featured .project-title {
-            font-size: 2rem;
+            font-size: clamp(1rem, 1.65vw, 1.25rem);
         }
 
         .project-desc {
-            font-size: .85rem;
+            font-size: .78rem;
             color: var(--silver);
-            line-height: 1.7;
+            line-height: 1.55;
             position: relative;
             z-index: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .project-tech {
@@ -972,7 +1031,7 @@
             flex-wrap: wrap;
             gap: .4rem;
             margin-top: auto;
-            padding-top: 1rem;
+            padding-top: .65rem;
             position: relative;
             z-index: 1;
         }
@@ -981,7 +1040,7 @@
             padding: .2rem .6rem;
             border-radius: 2rem;
             border: 1px solid rgba(255, 215, 0, .3);
-            font-size: .65rem;
+            font-size: .6rem;
             color: var(--purple2);
             font-family: 'Space Mono', monospace;
         }
@@ -1002,14 +1061,14 @@
         }
 
         .project-link-btn {
-            min-width: 36px;
-            height: 32px;
+            min-width: 32px;
+            height: 30px;
             padding: 0 .55rem;
             border-radius: .4rem;
             background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             color: var(--white);
-            font-size: .65rem;
+            font-size: .6rem;
             cursor: none;
             display: flex;
             align-items: center;
@@ -1036,8 +1095,11 @@
 
         .project-metrics {
             display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            gap: 1rem;
+            margin-top: .35rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
 
         .metric {
@@ -1905,6 +1967,12 @@
                 right: 2rem;
             }
 
+            .arc-reactor-backdrop {
+                width: min(56vw, 420px);
+                right: -5rem;
+                opacity: .45;
+            }
+
             section {
                 padding: 5rem 2rem;
             }
@@ -1917,6 +1985,10 @@
 
             .bento-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            .project-desc {
+                -webkit-line-clamp: 4;
             }
 
             .achievements-grid {
@@ -1941,6 +2013,13 @@
                 display: none;
             }
 
+            .arc-reactor-backdrop {
+                width: 88vw;
+                right: -38vw;
+                top: 56%;
+                opacity: .32;
+            }
+
             .bento-grid {
                 grid-template-columns: 1fr;
             }
@@ -1952,7 +2031,7 @@
 
             .project-card {
                 padding: 1.35rem;
-                min-height: 260px;
+                aspect-ratio: 1 / 1;
             }
 
             .project-card.featured .project-title,
@@ -1964,6 +2043,10 @@
             .project-desc,
             .projects-intro {
                 font-size: .9rem;
+            }
+
+            .project-desc {
+                -webkit-line-clamp: 4;
             }
 
             .project-links {
@@ -2058,6 +2141,7 @@
     <!-- HERO -->
     <section id="hero">
         <canvas id="hero-canvas"></canvas>
+        <div class="arc-reactor-backdrop" aria-hidden="true"></div>
         <div class="grid-lines"></div>
 
         <!-- HUD ELEMENTS -->
@@ -2079,7 +2163,7 @@
             </h1>
             <div class="hero-role reveal" id="rotating-role" style="transition-delay:.2s">Full Stack Developer</div>
             <p class="hero-desc reveal" style="transition-delay:.3s">
-                Crafting cinematic digital experiences with cutting-edge tech. I build things that feel <span
+                Crafting deployed AI products, polished web apps, and full-stack systems with interfaces that feel <span
                     style="color:var(--white);font-weight:500">alive</span>.
             </p>
             <div class="hero-btns reveal" style="transition-delay:.4s">
@@ -2108,7 +2192,7 @@
 
         <div class="hero-stats">
             <div class="stat-item reveal">
-                <div class="stat-num counter" data-target="17">0+</div>
+                <div class="stat-num counter" data-target="19">0+</div>
                 <div class="stat-label">PROJECTS</div>
             </div>
             <div class="stat-item reveal" style="transition-delay:.1s">
@@ -2149,16 +2233,16 @@
                 <div class="section-line reveal" style="transition-delay:.15s"></div>
                 <p class="reveal" style="transition-delay:.2s;color:var(--silver);line-height:1.9">I'm an <span
                         style="color:var(--white);font-weight:500">Information Technology student</span> and Full Stack
-                    Developer passionate about building real-world products. I specialize in web development, secure
-                    authentication systems, and AI-driven solutions.</p>
+                    Developer passionate about building real-world products. I specialize in AI-assisted web
+                    platforms, secure authentication systems, and polished full-stack product workflows.</p>
                 <p class="reveal" style="transition-delay:.25s;color:var(--silver);line-height:1.9;margin-top:1rem">
                     Currently pursuing my <span style="color:var(--white)">B.Tech at VBIT</span>, I bridge the gap
-                    between complex backend logic and intuitive frontend interfaces, with hands-on experience in
-                    Salesforce and Generative AI.</p>
+                    between complex backend logic and intuitive frontend interfaces, with hands-on understanding of
+                    product architecture, deployment, AI integration, Supabase-backed data flows, Salesforce, and Generative AI.</p>
 
                 <div class="stats-row">
                     <div class="stat-card reveal" style="transition-delay:.3s">
-                        <div class="stat-card-num counter" data-target="17">0</div>
+                        <div class="stat-card-num counter" data-target="19">0</div>
                         <div class="stat-card-label">PROJECTS</div>
                     </div>
                     <div class="stat-card reveal" style="transition-delay:.35s">
@@ -2190,9 +2274,9 @@
                 <h3 class="skill-cat-title">Interface Engineering</h3>
                 <div class="skill-pills">
                     <span class="skill-pill">Next.js</span><span class="skill-pill">React.js</span>
-                    <span class="skill-pill">LWC</span><span class="skill-pill">TypeScript</span>
-                    <span class="skill-pill">Tailwind CSS</span><span class="skill-pill">HTML5/CSS3</span>
-                    <span class="skill-pill">JavaScript (ES6+)</span><span class="skill-pill">Apex</span>
+                    <span class="skill-pill">Vite</span><span class="skill-pill">TypeScript</span>
+                    <span class="skill-pill">Tailwind CSS</span><span class="skill-pill">shadcn/ui</span>
+                    <span class="skill-pill">LWC</span><span class="skill-pill">Apex</span>
                 </div>
                 <div class="skill-bar-wrap">
                     <div class="skill-bar-item">
@@ -2202,7 +2286,7 @@
                         </div>
                     </div>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>TypeScript / LWC</span><span>94%</span></div>
+                        <div class="skill-bar-label"><span>TypeScript / Vite</span><span>94%</span></div>
                         <div class="skill-bar-track">
                             <div class="skill-bar-fill" data-width="94"></div>
                         </div>
@@ -2219,20 +2303,20 @@
                 <p class="skill-cat-label">02 / BACKEND</p>
                 <h3 class="skill-cat-title">Server Architecture</h3>
                 <div class="skill-pills">
-                    <span class="skill-pill">Python</span><span class="skill-pill">Supabase</span>
-                    <span class="skill-pill">Gradio</span><span class="skill-pill">Node.js</span>
-                    <span class="skill-pill">MySQL/MongoDB</span><span class="skill-pill">REST APIs</span>
+                    <span class="skill-pill">Supabase</span><span class="skill-pill">Auth Systems</span>
+                    <span class="skill-pill">Node.js</span><span class="skill-pill">Python</span>
+                    <span class="skill-pill">REST APIs</span><span class="skill-pill">MySQL/MongoDB</span>
                     <span class="skill-pill">Firebase</span><span class="skill-pill">Salesforce</span>
                 </div>
                 <div class="skill-bar-wrap">
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>Python / Gradio</span><span>95%</span></div>
+                        <div class="skill-bar-label"><span>Supabase / Auth</span><span>95%</span></div>
                         <div class="skill-bar-track">
                             <div class="skill-bar-fill" data-width="95"></div>
                         </div>
                     </div>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>Supabase / Backend Arch</span><span>92%</span></div>
+                        <div class="skill-bar-label"><span>Backend Architecture</span><span>92%</span></div>
                         <div class="skill-bar-track">
                             <div class="skill-bar-fill" data-width="92"></div>
                         </div>
@@ -2249,9 +2333,9 @@
                 <p class="skill-cat-label">03 / AI + CLOUD</p>
                 <h3 class="skill-cat-title">AI & Infrastructure</h3>
                 <div class="skill-pills">
-                    <span class="skill-pill">LLMs / GenAI</span><span class="skill-pill">Stockfish AI</span>
-                    <span class="skill-pill">Hugging Face</span><span class="skill-pill">Vercel</span>
-                    <span class="skill-pill">Git/GitHub</span><span class="skill-pill">Postman</span>
+                    <span class="skill-pill">LLMs / GenAI</span><span class="skill-pill">AI Agents</span>
+                    <span class="skill-pill">Prompt Engineering</span><span class="skill-pill">Vercel</span>
+                    <span class="skill-pill">Hugging Face</span><span class="skill-pill">Git/GitHub</span>
                     <span class="skill-pill">Cybersecurity</span><span class="skill-pill">IoT</span>
                 </div>
                 <div class="skill-bar-wrap">
@@ -2262,7 +2346,7 @@
                         </div>
                     </div>
                     <div class="skill-bar-item">
-                        <div class="skill-bar-label"><span>AI Integration / HuggingFace</span><span>90%</span></div>
+                        <div class="skill-bar-label"><span>AI Product Integration</span><span>90%</span></div>
                         <div class="skill-bar-track">
                             <div class="skill-bar-fill" data-width="90"></div>
                         </div>
@@ -2284,8 +2368,9 @@
         <h2 class="section-title reveal" style="transition-delay:.1s">Selected <span>Projects</span></h2>
         <div class="section-line reveal" style="transition-delay:.15s"></div>
         <p class="projects-intro reveal" style="transition-delay:.18s">
-            A tighter look at the products I have shipped: <strong>deployed web apps, AI tools, real-time interfaces,
-                and hardware-backed prototypes</strong>. Every featured card links to a live build or a working demo.
+            A tighter look at the products I have shipped, ordered by most recently updated work: <strong>university AI
+                systems, premium booking products, deployed web apps, real-time interfaces, and hardware-backed prototypes</strong>.
+            Every featured card links to a live build or a working demo.
         </p>
 
         <div class="project-filters reveal" style="transition-delay:.2s">
@@ -2296,9 +2381,57 @@
         </div>
 
         <div class="bento-grid">
-            <div class="project-card featured reveal" data-category="web fullstack">
+            <div class="project-card featured reveal" data-category="web fullstack" data-modified="2026-05-15">
                 <div class="project-card-bg"></div>
-                <p class="project-num">// 001 — LIVE PRODUCT</p>
+                <p class="project-num">// 001 - UPDATED MAY 2026</p>
+                <h3 class="project-title">VBIT Nexus AI</h3>
+                <p class="project-desc">A next-generation university AI ecosystem for VBIT, combining specialized AI agents, student workflows, campus modules, quizzes, study rooms, feeds, and admin intelligence into one operating system.</p>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <span class="metric-val">12</span>
+                        <span class="metric-label">AI AGENTS</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-val">24</span>
+                        <span class="metric-label">PAGES</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://vbit-nexus-aia.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link-btn">LIVE</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">Next.js</span><span class="tech-pill">AI Agents</span><span class="tech-pill">Vercel</span>
+                </div>
+            </div>
+
+            <div class="project-card featured reveal" data-category="web fullstack" data-modified="2026-05-14" style="transition-delay:.08s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 002 - UPDATED MAY 2026</p>
+                <h3 class="project-title">Carently IND</h3>
+                <p class="project-desc">A premium luxury car rental platform with authentication, concierge-style booking, fleet discovery, pricing plans, insurance details, testimonials, and an admin surface for bookings and fleet operations.</p>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <span class="metric-val">Live</span>
+                        <span class="metric-label">BOOKING APP</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-val">Admin</span>
+                        <span class="metric-label">FLEET OPS</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://carently-ind.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-btn">LIVE</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">React</span><span class="tech-pill">Vite</span><span class="tech-pill">Supabase</span>
+                </div>
+            </div>
+
+            <div class="project-card featured reveal" data-category="web fullstack" data-modified="2026-05-09" style="transition-delay:.16s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 003 - LIVE PRODUCT</p>
                 <h3 class="project-title">Notes Share App</h3>
                 <p class="project-desc">A comprehensive student collaboration platform for resource sharing. Built with
                     a clean interface for seamless note exchange and group learning.</p>
@@ -2321,7 +2454,7 @@
                 </div>
             </div>
 
-            <div class="project-card reveal" data-category="fullstack" style="transition-delay:.1s">
+            <div class="project-card reveal" data-category="fullstack" data-modified="2025-09-15" style="transition-delay:.1s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 002</p>
                 <h3 class="project-title">Secure Digital Authentication</h3>
@@ -2336,7 +2469,7 @@
                 </div>
             </div>
 
-            <div class="project-card reveal" data-category="iot" style="transition-delay:.15s">
+            <div class="project-card reveal" data-category="iot" data-modified="2025-08-20" style="transition-delay:.15s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 003</p>
                 <h3 class="project-title">Smart Gloves</h3>
@@ -2351,7 +2484,7 @@
                 </div>
             </div>
 
-            <div class="project-card reveal" data-category="fullstack" style="transition-delay:.2s">
+            <div class="project-card reveal" data-category="fullstack" data-modified="2026-01-20" style="transition-delay:.2s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 004</p>
                 <h3 class="project-title">KnightMind Chess</h3>
@@ -2365,7 +2498,7 @@
                 </div>
             </div>
 
-            <div class="project-card reveal" data-category="web fullstack" style="transition-delay:.25s">
+            <div class="project-card reveal" data-category="web fullstack" data-modified="2026-02-10" style="transition-delay:.25s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 005</p>
                 <h3 class="project-title">Blue Wing AI</h3>
@@ -2379,7 +2512,7 @@
                 </div>
             </div>
 
-            <div class="project-card reveal" data-category="web" style="transition-delay:.3s">
+            <div class="project-card reveal" data-category="web" data-modified="2026-03-05" style="transition-delay:.3s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 006</p>
                 <h3 class="project-title">AI Career OS</h3>
@@ -2393,7 +2526,7 @@
                 </div>
             </div>
 
-            <div class="project-card featured reveal" data-category="web fullstack" style="transition-delay:.32s">
+            <div class="project-card featured reveal" data-category="web fullstack" data-modified="2026-05-08" style="transition-delay:.32s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 007 - AI TRAVEL PLANNER</p>
                 <h3 class="project-title">Voyago AI Travel</h3>
@@ -2417,7 +2550,7 @@
                 </div>
             </div>
 
-            <div class="project-card reveal" data-category="web fullstack" style="transition-delay:.34s">
+            <div class="project-card reveal" data-category="web fullstack" data-modified="2026-05-07" style="transition-delay:.34s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 008</p>
                 <h3 class="project-title">Chatly</h3>
@@ -2437,7 +2570,7 @@
                 </div>
             </div>
 
-            <div class="project-card reveal" data-category="web" style="transition-delay:.36s">
+            <div class="project-card reveal" data-category="web" data-modified="2026-05-06" style="transition-delay:.36s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 009</p>
                 <h3 class="project-title">ChemCraft</h3>
@@ -2457,7 +2590,7 @@
                 </div>
             </div>
 
-            <div class="project-card featured reveal" data-category="web fullstack" style="transition-delay:.38s">
+            <div class="project-card featured reveal" data-category="web fullstack" data-modified="2026-04-20" style="transition-delay:.38s">
                 <div class="project-card-bg"></div>
                 <p class="project-num">// 010 — CLINICAL OS</p>
                 <h3 class="project-title">MediScan X Ωmega</h3>
@@ -2743,6 +2876,22 @@
             progressBar.style.width = pct + '%';
         });
 
+        // Keep project cards ordered by the latest modified date.
+        const projectGrid = document.querySelector('#projects .bento-grid');
+        if (projectGrid) {
+            const cards = [...projectGrid.querySelectorAll('.project-card')];
+            cards
+                .sort((a, b) => new Date(b.dataset.modified || 0) - new Date(a.dataset.modified || 0))
+                .forEach((card, idx) => {
+                    projectGrid.appendChild(card);
+                    const num = card.querySelector('.project-num');
+                    if (num) {
+                        const suffix = num.textContent.replace(/^\/\/\s*\d+\s*/, '').trim();
+                        num.textContent = `// ${String(idx + 1).padStart(3, '0')}${suffix ? ' ' + suffix : ''}`;
+                    }
+                });
+        }
+
         // ─── REVEAL ON SCROLL ────────────────────────────────
         function initReveal() {
             const els = document.querySelectorAll('.reveal');
@@ -2786,7 +2935,7 @@
         document.querySelectorAll('.skill-category').forEach(el => barObs.observe(el));
 
         // ─── ROTATING ROLE TEXT ──────────────────────────────
-        const roles = ['Full Stack Developer', 'UI Engineer', 'AI Builder', 'Full Stack Web Developer', 'Problem Solver'];
+        const roles = ['Full Stack Developer', 'AI Product Builder', 'React / Next.js Developer', 'Supabase Integrator', 'UI Engineer'];
         let roleIdx = 0;
         const roleEl = document.getElementById('rotating-role');
         function rotateRole() {
