@@ -3,7 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Krishnam Raju - Full Stack Web Developer & AI Builder. Crafting cinematic digital experiences.">
+    <meta name="theme-color" content="#050505">
+    <meta property="og:title" content="Krishnam Raju | Full Stack Web Developer & AI Builder">
+    <meta property="og:description" content="A cinematic portfolio featuring deployed web apps, AI tools, secure systems, and hardware-backed prototypes.">
+    <meta property="og:type" content="website">
     <title>Krishnam Raju | Full Stack Web Developer & AI Enthusiast</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
@@ -828,8 +833,21 @@
         .project-filters {
             display: flex;
             gap: .75rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
+        }
+
+        .projects-intro {
+            max-width: 760px;
+            color: var(--silver);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: -1rem 0 2.5rem;
+        }
+
+        .projects-intro strong {
+            color: var(--white);
+            font-weight: 600;
         }
 
         .filter-btn {
@@ -868,6 +886,10 @@
             overflow: hidden;
             transition: all .4s cubic-bezier(.4, 0, .2, 1);
             cursor: none;
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+            min-height: 280px;
         }
 
         .project-card.featured {
@@ -879,6 +901,11 @@
             border-color: var(--border2);
             transform: translateY(-6px) rotateX(1deg);
             box-shadow: 0 20px 60px rgba(255, 0, 0, .2);
+        }
+
+        .project-card:focus-within {
+            border-color: var(--purple2);
+            box-shadow: 0 0 0 1px rgba(255, 204, 0, .35), 0 20px 60px rgba(255, 0, 0, .16);
         }
 
         .project-card::before {
@@ -914,7 +941,8 @@
             font-size: .7rem;
             color: var(--purple);
             letter-spacing: .1em;
-            margin-bottom: 1rem;
+            margin-bottom: .25rem;
+            padding-right: 5.25rem;
         }
 
         .project-title {
@@ -922,9 +950,9 @@
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--white);
-            margin-bottom: .75rem;
             position: relative;
             z-index: 1;
+            padding-right: 4.5rem;
         }
 
         .project-card.featured .project-title {
@@ -943,10 +971,9 @@
             display: flex;
             flex-wrap: wrap;
             gap: .4rem;
-            position: absolute;
-            bottom: 1.25rem;
-            left: 2rem;
-            right: 2rem;
+            margin-top: auto;
+            padding-top: 1rem;
+            position: relative;
             z-index: 1;
         }
 
@@ -966,7 +993,7 @@
             display: flex;
             gap: .5rem;
             z-index: 1;
-            opacity: 0;
+            opacity: .9;
             transition: opacity .3s;
         }
 
@@ -975,13 +1002,14 @@
         }
 
         .project-link-btn {
-            width: 32px;
+            min-width: 36px;
             height: 32px;
+            padding: 0 .55rem;
             border-radius: .4rem;
             background: rgba(15, 15, 18, 0.7);
             border: 1px solid var(--border);
             color: var(--white);
-            font-size: .7rem;
+            font-size: .65rem;
             cursor: none;
             display: flex;
             align-items: center;
@@ -994,6 +1022,16 @@
         .project-link-btn:hover {
             background: var(--purple);
             border-color: var(--purple);
+        }
+
+        .project-link-btn:focus-visible,
+        .filter-btn:focus-visible {
+            outline: 2px solid var(--purple2);
+            outline-offset: 3px;
+        }
+
+        .project-card.is-hidden {
+            display: none;
         }
 
         .project-metrics {
@@ -1912,6 +1950,31 @@
                 grid-row: span 1;
             }
 
+            .project-card {
+                padding: 1.35rem;
+                min-height: 260px;
+            }
+
+            .project-card.featured .project-title,
+            .project-title {
+                font-size: 1.25rem;
+                line-height: 1.25;
+            }
+
+            .project-desc,
+            .projects-intro {
+                font-size: .9rem;
+            }
+
+            .project-links {
+                top: .9rem;
+                right: .9rem;
+            }
+
+            .project-tech {
+                padding-top: .75rem;
+            }
+
             .skills-grid {
                 grid-template-columns: 1fr;
             }
@@ -1967,11 +2030,11 @@
 
     <!-- THEME SWITCHER -->
     <div id="theme-switcher">
-        <button class="theme-btn" id="theme-toggle-btn" title="Switch theme">◐</button>
+        <button class="theme-btn" id="theme-toggle-btn" title="Switch theme" aria-label="Switch theme">◐</button>
         <div class="theme-options" id="theme-options">
-            <button class="theme-option" data-theme="" style="background:linear-gradient(135deg, #ff3333, #ffcc00)"
+            <button class="theme-option" data-theme="" aria-label="Use Crimson Core theme" style="background:linear-gradient(135deg, #ff3333, #ffcc00)"
                 title="Crimson Core (Default)"></button>
-            <button class="theme-option" data-theme="ironcore" style="background:linear-gradient(135deg, #00a2ff, #00ffcc)"
+            <button class="theme-option" data-theme="ironcore" aria-label="Use Iron Core theme" style="background:linear-gradient(135deg, #00a2ff, #00ffcc)"
                 title="Iron Core (Blue)"></button>
         </div>
     </div>
@@ -2045,7 +2108,7 @@
 
         <div class="hero-stats">
             <div class="stat-item reveal">
-                <div class="stat-num counter" data-target="7">0+</div>
+                <div class="stat-num counter" data-target="17">0+</div>
                 <div class="stat-label">PROJECTS</div>
             </div>
             <div class="stat-item reveal" style="transition-delay:.1s">
@@ -2095,7 +2158,7 @@
 
                 <div class="stats-row">
                     <div class="stat-card reveal" style="transition-delay:.3s">
-                        <div class="stat-card-num counter" data-target="14">0</div>
+                        <div class="stat-card-num counter" data-target="17">0</div>
                         <div class="stat-card-label">PROJECTS</div>
                     </div>
                     <div class="stat-card reveal" style="transition-delay:.35s">
@@ -2220,6 +2283,10 @@
         <p class="section-tag reveal">// FEATURED WORK</p>
         <h2 class="section-title reveal" style="transition-delay:.1s">Selected <span>Projects</span></h2>
         <div class="section-line reveal" style="transition-delay:.15s"></div>
+        <p class="projects-intro reveal" style="transition-delay:.18s">
+            A tighter look at the products I have shipped: <strong>deployed web apps, AI tools, real-time interfaces,
+                and hardware-backed prototypes</strong>. Every featured card links to a live build or a working demo.
+        </p>
 
         <div class="project-filters reveal" style="transition-delay:.2s">
             <button class="filter-btn active" data-filter="all">All</button>
@@ -2242,9 +2309,9 @@
                     </div>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/krishnaraju7674/vbit-notes" target="_blank"
+                    <a href="https://github.com/krishnaraju7674/vbit-notes" target="_blank" rel="noopener noreferrer"
                         class="project-link-btn">GH</a>
-                    <a href="https://krishnaraju7674.github.io/vbit-notes/" target="_blank"
+                    <a href="https://krishnaraju7674.github.io/vbit-notes/" target="_blank" rel="noopener noreferrer"
                         class="project-link-btn">↗</a>
                 </div>
                 <div class="project-tech">
@@ -2261,7 +2328,7 @@
                 <p class="project-desc">A robust security system combining Face Recognition (OpenCV) with
                     Blockchain-backed identity validation for tamper-resistant access.</p>
                 <div class="project-links">
-                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
+                    <a href="https://github.com/krishnaraju7674" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
                 </div>
                 <div class="project-tech">
                     <span class="tech-pill">Python</span><span class="tech-pill">OpenCV</span><span
@@ -2276,7 +2343,7 @@
                 <p class="project-desc">An IoT prototype wearable device using sensors for gesture recognition and
                     assistive automation, demonstrating hardware-software integration.</p>
                 <div class="project-links">
-                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
+                    <a href="https://github.com/krishnaraju7674" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
                 </div>
                 <div class="project-tech">
                     <span class="tech-pill">IoT</span><span class="tech-pill">Sensors</span><span
@@ -2290,8 +2357,8 @@
                 <h3 class="project-title">KnightMind Chess</h3>
                 <p class="project-desc">A professional-grade chess engine with AI-driven analysis, move suggestions, and real-time multiplayer capabilities.</p>
                 <div class="project-links">
-                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
-                    <a href="https://expo.dev/accounts/ishowsmart/projects/knightmind-chess/builds/620b360f-401e-4574-86ff-c3bfb6c3d0e0" target="_blank" class="project-link-btn">↗</a>
+                    <a href="https://github.com/krishnaraju7674/KnightMindChess" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://expo.dev/accounts/ishowsmart/projects/knightmind-chess/builds/620b360f-401e-4574-86ff-c3bfb6c3d0e0" target="_blank" rel="noopener noreferrer" class="project-link-btn">↗</a>
                 </div>
                 <div class="project-tech">
                     <span class="tech-pill">TypeScript</span><span class="tech-pill">React</span><span class="tech-pill">Stockfish</span>
@@ -2304,8 +2371,8 @@
                 <h3 class="project-title">Blue Wing AI</h3>
                 <p class="project-desc">Advanced flight-intelligence platform utilizing generative AI for real-time navigation and drone telemetry analysis.</p>
                 <div class="project-links">
-                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
-                    <a href="https://blue-wing-ai.vercel.app" target="_blank" class="project-link-btn">↗</a>
+                    <a href="https://github.com/krishnaraju7674/blue-wing-ai" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://blue-wing-ai.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-btn">↗</a>
                 </div>
                 <div class="project-tech">
                     <span class="tech-pill">Next.js</span><span class="tech-pill">Python</span><span class="tech-pill">LLMs</span>
@@ -2318,22 +2385,86 @@
                 <h3 class="project-title">AI Career OS</h3>
                 <p class="project-desc">A comprehensive dashboard for managing careers in the AI era, including roadmap generators and job intelligence tools.</p>
                 <div class="project-links">
-                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
-                    <a href="https://ai-career-os-puce.vercel.app" target="_blank" class="project-link-btn">↗</a>
+                    <a href="https://github.com/krishnaraju7674/ai-career-os" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://ai-career-os-puce.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-btn">↗</a>
                 </div>
                 <div class="project-tech">
                     <span class="tech-pill">React</span><span class="tech-pill">Tailwind</span><span class="tech-pill">Supabase</span>
                 </div>
             </div>
 
-            <div class="project-card featured reveal" data-category="web fullstack" style="transition-delay:.35s">
+            <div class="project-card featured reveal" data-category="web fullstack" style="transition-delay:.32s">
                 <div class="project-card-bg"></div>
-                <p class="project-num">// 007 — CLINICAL OS</p>
+                <p class="project-num">// 007 - AI TRAVEL PLANNER</p>
+                <h3 class="project-title">Voyago AI Travel</h3>
+                <p class="project-desc">An AI-powered travel planning experience for turning destination ideas into polished itineraries with a clean, trip-focused interface.</p>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <span class="metric-val">Live</span>
+                        <span class="metric-label">VERCEL APP</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-val">AI</span>
+                        <span class="metric-label">ITINERARIES</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674/voyago-ai-travel" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://voyago-ai-travel.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-btn">LIVE</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">AI</span><span class="tech-pill">Travel</span><span class="tech-pill">Vercel</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" data-category="web fullstack" style="transition-delay:.34s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 008</p>
+                <h3 class="project-title">Chatly</h3>
+                <p class="project-desc">A modern chat application focused on fast conversation flows, responsive layouts, and a simple social messaging experience.</p>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <span class="metric-val">Live</span>
+                        <span class="metric-label">MESSAGING UI</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674/chatly" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://chatly-i1q9.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-btn">LIVE</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">Chat</span><span class="tech-pill">Realtime</span><span class="tech-pill">Vercel</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" data-category="web" style="transition-delay:.36s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 009</p>
+                <h3 class="project-title">ChemCraft</h3>
+                <p class="project-desc">A chemistry-focused web app built for interactive exploration, structured learning, and a more engaging science workflow.</p>
+                <div class="project-metrics">
+                    <div class="metric">
+                        <span class="metric-val">Live</span>
+                        <span class="metric-label">LEARNING TOOL</span>
+                    </div>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/krishnaraju7674/chemcraft" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://chemcraft-nu.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-btn">LIVE</a>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-pill">Chemistry</span><span class="tech-pill">Learning</span><span class="tech-pill">Vercel</span>
+                </div>
+            </div>
+
+            <div class="project-card featured reveal" data-category="web fullstack" style="transition-delay:.38s">
+                <div class="project-card-bg"></div>
+                <p class="project-num">// 010 — CLINICAL OS</p>
                 <h3 class="project-title">MediScan X Ωmega</h3>
                 <p class="project-desc">High-fidelity medical diagnostic platform featuring quantum-clinical UI and AI-driven healthcare data visualization.</p>
                 <div class="project-links">
-                    <a href="https://github.com/krishnaraju7674" target="_blank" class="project-link-btn">GH</a>
-                    <a href="https://gkr7674-mediscan-x-omega.hf.space" target="_blank" class="project-link-btn">↗</a>
+                    <a href="https://github.com/krishnaraju7674" target="_blank" rel="noopener noreferrer" class="project-link-btn">GH</a>
+                    <a href="https://gkr7674-mediscan-x-omega.hf.space" target="_blank" rel="noopener noreferrer" class="project-link-btn">↗</a>
                 </div>
                 <div class="project-tech">
                     <span class="tech-pill">Gradio</span><span class="tech-pill">Python</span><span class="tech-pill">Medical AI</span>
@@ -2456,21 +2587,21 @@
                     freelance work, full-time roles, and creative collaborations. Let's make something that turns heads.
                 </p>
                 <div class="social-links reveal" style="transition-delay:.3s">
-                    <a href="https://x.com/Gkr7674" target="_blank" class="social-link">
+                    <a href="https://x.com/Gkr7674" target="_blank" rel="noopener noreferrer" class="social-link">
                         <div class="social-icon">𝕏</div>
                         <div>
                             <div class="social-name">Twitter / X</div>
                             <div class="social-handle">@Gkr7674</div>
                         </div>
                     </a>
-                    <a href="https://www.linkedin.com/in/krishnam-raju-g7674/" target="_blank" class="social-link">
+                    <a href="https://www.linkedin.com/in/krishnam-raju-g7674/" target="_blank" rel="noopener noreferrer" class="social-link">
                         <div class="social-icon" style="font-size:.7rem">in</div>
                         <div>
                             <div class="social-name">LinkedIn</div>
                             <div class="social-handle">krishnam-raju-g7674</div>
                         </div>
                     </a>
-                    <a href="https://github.com/krishnaraju7674" target="_blank" class="social-link">
+                    <a href="https://github.com/krishnaraju7674" target="_blank" rel="noopener noreferrer" class="social-link">
                         <div class="social-icon" style="font-size:.7rem">GH</div>
                         <div>
                             <div class="social-name">GitHub</div>
@@ -2488,20 +2619,20 @@
             </div>
             <div class="contact-form reveal" style="transition-delay:.2s">
                 <div class="form-group">
-                    <label class="form-label">YOUR NAME</label>
-                    <input type="text" class="form-input" placeholder="Tony Stark" id="form-name">
+                    <label class="form-label" for="form-name">YOUR NAME</label>
+                    <input type="text" class="form-input" placeholder="Tony Stark" id="form-name" name="name">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">EMAIL ADDRESS</label>
-                    <input type="email" class="form-input" placeholder="hello@company.com" id="form-email">
+                    <label class="form-label" for="form-email">EMAIL ADDRESS</label>
+                    <input type="email" class="form-input" placeholder="hello@company.com" id="form-email" name="email">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">PROJECT TYPE</label>
-                    <input type="text" class="form-input" placeholder="Web App / AI Product / Design...">
+                    <label class="form-label" for="form-project">PROJECT TYPE</label>
+                    <input type="text" class="form-input" placeholder="Web App / AI Product / Design..." id="form-project" name="project">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">YOUR MESSAGE</label>
-                    <textarea class="form-textarea" placeholder="Tell me about your dream project..."></textarea>
+                    <label class="form-label" for="form-message">YOUR MESSAGE</label>
+                    <textarea class="form-textarea" placeholder="Tell me about your dream project..." id="form-message" name="message"></textarea>
                 </div>
                 <button class="submit-btn" id="submit-btn">Send Message</button>
             </div>
@@ -2698,12 +2829,23 @@
                 const filter = btn.dataset.filter;
                 document.querySelectorAll('.project-card').forEach(card => {
                     if (filter === 'all' || card.dataset.category.includes(filter)) {
-                        card.style.display = 'block'; card.style.opacity = '1'; card.style.pointerEvents = 'all';
+                        card.classList.remove('is-hidden');
+                        card.style.opacity = '1';
+                        card.style.pointerEvents = 'all';
                     } else {
-                        card.style.opacity = '0.2'; card.style.pointerEvents = 'none';
+                        card.classList.add('is-hidden');
+                        card.style.pointerEvents = 'none';
                     }
                 });
             });
+        });
+
+        document.querySelectorAll('a[target="_blank" rel="noopener noreferrer"]').forEach(link => {
+            link.rel = 'noopener noreferrer';
+            if (!link.getAttribute('aria-label')) {
+                const label = link.textContent.trim() || 'external link';
+                link.setAttribute('aria-label', `Open ${label}`);
+            }
         });
 
         // ─── THREE.JS HERO SCENE (ULTRA-REALISTIC ARC REACTOR) ──
@@ -2939,10 +3081,21 @@
 
         // ─── SUBMIT BUTTON ────────────────────────────────────
         document.getElementById('submit-btn').addEventListener('click', function () {
-            const name = document.getElementById('form-name').value;
-            const email = document.getElementById('form-email').value;
+            const name = document.getElementById('form-name').value.trim();
+            const email = document.getElementById('form-email').value.trim();
+            const project = document.getElementById('form-project').value.trim();
+            const message = document.getElementById('form-message').value.trim();
             if (!name || !email) { alert('Please fill in your name and email!'); return; }
-            this.textContent = 'Message Sent! ✓';
+            const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
+            const body = encodeURIComponent([
+                `Name: ${name}`,
+                `Email: ${email}`,
+                `Project type: ${project || 'Not specified'}`,
+                '',
+                message || 'I would like to discuss a project with you.'
+            ].join('\n'));
+            window.location.href = `mailto:gkr.7674@gmail.com?subject=${subject}&body=${body}`;
+            this.textContent = 'Opening Email...';
             this.style.background = 'linear-gradient(135deg,#059669,#10b981)';
             setTimeout(() => { this.textContent = 'Send Message'; this.style.background = ''; }, 3000);
         });
